@@ -9,8 +9,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-// bd.once('open', () => {
+bd.once('open', () => {
     app.listen(PORT, () => {
         console.log(`API server running on port # ${PORT}`)
     });
-// });
+});

@@ -1,5 +1,5 @@
 const User = require('./User');
-const Thought =('./Thought');
-const Reaction = ('./Reaction');
+const Thought = require('./Thought');
+const Reaction = require('./Reaction');
 
 module.exporsts = { User, Thought, Reaction };
