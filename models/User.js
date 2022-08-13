@@ -45,8 +45,8 @@ userSchema
     return `${this.friends}`;
   })
   .set(function (v) {
-    const numberOfFriends = v.split(' ');
-    this.set({ numberOfFriends });
+    const friends = v.split(' ');
+    this.set({ friends });
   });
 
 const User = model("user", userSchema);
