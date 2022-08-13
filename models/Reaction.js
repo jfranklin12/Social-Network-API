@@ -26,6 +26,7 @@ const reactionSchema = new Schema(
         // do I need timestamps?
         timestamps: true,
         toJSON: {
+            // virtuals?
             getters: true,
         },
         id: false,

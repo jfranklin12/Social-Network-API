@@ -38,7 +38,7 @@ const userSchema = new Schema(
     id: false,
   }
 );
-
+// do i need to use this.friends.length?
 userSchema
   .virtual("friendcount")
   .get(function () {
