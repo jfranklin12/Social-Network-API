@@ -37,15 +37,11 @@ const userSchema = new Schema(
     id: false,
   }
 );
-// do i need to use this.friends.length?
+// virtual to set friend count
 userSchema
   .virtual("friendcount")
   .get(function () {
-    return `${this.friends}`;
-  })
-  .set(function (v) {
-    const friends = v.split(' ');
-    this.set({ friends });
+    return this.friends.length
   });
 
 const User = model("user", userSchema);
