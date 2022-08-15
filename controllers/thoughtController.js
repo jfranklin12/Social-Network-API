@@ -24,7 +24,6 @@ module.exports = {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
                     { $push: { thoughts: thought._id } },
-                    { new: true }
                 );
             })
             .then((user) =>
@@ -43,13 +42,12 @@ module.exports = {
     updateThought(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $set: req.body },
-            { runValidators: true, new: true }
+            { $set: req.body }
         )
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : res.json(thought)
+                    : res.json("Your thought has been updated 💭")
             )
             .catch((err) => {
                 console.log(err);
@@ -64,8 +62,7 @@ module.exports = {
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
                     : User.findOneandDelete(
                         { thought: req.params.thoughtId },
-                        { $pull: { thoughts: req.paramas.thoughtId } },
-                        { new: true }
+                        { $pull: { thoughts: req.paramas.thoughtId } }
                     )
             )
             .then((user) =>
@@ -79,26 +76,25 @@ module.exports = {
     addReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $addtoSet: { reactions: req.body } },
-            { runValidators: true, new: true }
+            { $push: { reactions: req.body } }
         )
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : res.json(thought)
+                    : res.json('Your reaction was added 🙌')
             )
             .catch((err) => res.status(500).json(err));
     },
+    // delete reactions... not deleteing reaction returns status 500
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
-            { runValidators: true, new: true }
+            { $pull: { reactions: req.params.reactionId  } }
         )
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: ' There is no thought with this id!' })
-                    : res.join(thought)
+                    : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
     },
