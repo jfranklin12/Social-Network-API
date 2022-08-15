@@ -70,7 +70,7 @@ const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 // gets a random username
 const getRandomUsername = () => getRandomArrItem(username);
 // gets a random email
-const getRandomEmail = () => getRandomArrItem(email);
+// const getRandomEmail = () => getRandomArrItem(email);
 
 // create random user
 const createRandomUser = (int) => {
@@ -79,8 +79,8 @@ const createRandomUser = (int) => {
         results.push({
             username: username[i], //getRandomUsername(),
             email: email[i], //getRandomEmail(),
-            thoughts: [],//[...getRandomThought(3)],
-            friends: []//[...getRandomUsername(3)],
+            thoughts: [],
+            friends: []
         });
     }
     return results;
@@ -98,19 +98,19 @@ const getRandomThought = (int) => {
     return results;
 };
 // create reactions to be added to thoughts... also not sure about
-const getThoughtReactions = (int) => {
-    if (int === 1) {
-        return getRandomArrItem(reactions);
-    }
-    const results = [];
-    for (let i = 0; i < int; i++) {
-        results.push({
-            reactionBody: getRandomArrItem(reactions),
-            username: getRandomUsername,
-        });
-    }
-    return results;
-};
+// const getThoughtReactions = (int) => {
+//     if (int === 1) {
+//         return getRandomArrItem(reactions);
+//     }
+//     const results = [];
+//     for (let i = 0; i < int; i++) {
+//         results.push({
+//             reactionBody: getRandomArrItem(reactions),
+//             username: getRandomUsername,
+//         });
+//     }
+//     return results;
+// };
 
 module.exports = { createRandomUser, getRandomThought }
 

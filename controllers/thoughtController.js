@@ -13,7 +13,7 @@ module.exports = {
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'No thought with that ID!' })
-                    : res.json(application)
+                    : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
     },
@@ -24,7 +24,7 @@ module.exports = {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
                     { $addtoSet: { thoughts: thought._id } },
-                    { new: ture }
+                    { new: true }
                 );
             })
             .then((user) =>

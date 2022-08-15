@@ -24,7 +24,7 @@ module.exports = {
             .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err));
     },
-    // update user by its id
+    // update user by its id... not working with insomnia
     updateUser(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -52,38 +52,39 @@ module.exports = {
             .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
-    // need to create friend post and delete
+    // add friend
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $push: { friends: req.params.friendId } },
             { runValidators: true, new: true }
-            )
-        .then((user) =>
-        !user
-        ? res.status(404).json({ message: 'There is no user with this id!' })
-        : res.status(user)
         )
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'There is no user with this id!' })
+                    : res.status(user)
+            )
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            })
     },
+    // delete friend
     deleteFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
             { $pull: { friends: req.params.friendId } },
             { runValidators: true, new: true }
-            )
-        .then((user) =>
-        !user
-        ? res.status(404).json({ message: 'There is no user with this id!' })
-        : res.status(user)
         )
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'There is no user with this id!' })
+                    : res.status(user)
+            )
+            .catch((err) => {
+                console.log(err);
+                res.status(500).json(err);
+            })
     }
 
 };

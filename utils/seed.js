@@ -9,7 +9,7 @@ connection.once('open', async () => {
     await Thought.deleteMany({});
     await User.deleteMany({});
 
-    const users = createRandomUser(5);
+    const users = createRandomUser(10);
     const thoughts = getRandomThought(10);
 
     await User.insertMany(users);
