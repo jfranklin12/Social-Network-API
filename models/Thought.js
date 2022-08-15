@@ -11,21 +11,17 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            // Should this be Date.now or formatedDate?
             default: Date.now,
             get: formatedDate,
         },
-
-        // should this be username with type: STRING, required: true
-        username: 
+        username:
         {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String,
+            required: true,
         },
         reactions: [reactionSchema],
     },
     {
-        // do I need timestamps?
         timestamps: true,
         toJSON: {
             virtuals: true,

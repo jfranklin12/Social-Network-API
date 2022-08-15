@@ -53,4 +53,37 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // need to create friend post and delete
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $push: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+            )
+        .then((user) =>
+        !user
+        ? res.status(404).json({ message: 'There is no user with this id!' })
+        : res.status(user)
+        )
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    },
+    deleteFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { runValidators: true, new: true }
+            )
+        .then((user) =>
+        !user
+        ? res.status(404).json({ message: 'There is no user with this id!' })
+        : res.status(user)
+        )
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    }
+
 };

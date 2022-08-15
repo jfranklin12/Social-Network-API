@@ -17,16 +17,13 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            // Should this be Date.now or formatedDate?
-            default: Date.now(),
+            default: Date.now,
             get: formatedDate,
         },
     },
     {
-        // do I need timestamps?
         timestamps: true,
         toJSON: {
-            // virtuals?
             getters: true,
         },
         id: false,

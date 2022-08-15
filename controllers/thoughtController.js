@@ -20,7 +20,7 @@ module.exports = {
     // create new thought 
     createThought(req, res) {
         Thought.create(req.body)
-            .then((application) => {
+            .then((thought) => {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
                     { $addtoSet: { thoughts: thought._id } },

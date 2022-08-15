@@ -65,21 +65,22 @@ const reactions = [
 ]
 
 // gets a random item from a given array
-const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.lenth)];
+const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // gets a random username
-const getRandomUsername = () => `${getRandomArrItem(username)}`;
+const getRandomUsername = () => getRandomArrItem(username);
 // gets a random email
-const getRandomEmail = () => `${getRandomArrItem(email)}`
+const getRandomEmail = () => getRandomArrItem(email);
+
 // create random user
 const createRandomUser = (int) => {
     let results = [];
     for (let i = 0; i < int; i++) {
         results.push({
-            username: getRandomUsername,
-            email: getRandomEmail,
-            thoughts: [...getRandomThought(3)],
-            friends: [...getRandomUsername(3)],
+            username: username[i], //getRandomUsername(),
+            email: email[i], //getRandomEmail(),
+            thoughts: [],//[...getRandomThought(3)],
+            friends: []//[...getRandomUsername(3)],
         });
     }
     return results;
@@ -90,8 +91,8 @@ const getRandomThought = (int) => {
     for (let i = 0; i < int; i++) {
         results.push({
             thoughtText: getRandomArrItem(thoughts),
-            username: getRandomUsername,
-            reactions: [...getThoughtReactions(3)],
+            username: getRandomUsername(),
+            reactions: [],
         });
     }
     return results;
