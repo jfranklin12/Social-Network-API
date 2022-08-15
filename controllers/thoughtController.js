@@ -54,21 +54,13 @@ module.exports = {
                 res.status(500).json(err);
             });
     },
-    // delete thought... deleting thought but returing 500 error
+    // delete thought
     deleteThought(req, res) {
-        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+        Thought.deleteOne({ _id: req.params.thoughtId })
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : User.findOneandDelete(
-                        { thought: req.params.thoughtId },
-                        { $pull: { thoughts: req.paramas.thoughtId } }
-                    )
-            )
-            .then((user) =>
-                !user
-                    ? res.status(404).json({ message: ' Thought deleted, but found no user with that ID!' })
-                    : res.json({ message: 'Thought successfully deleted!' })
+                    : res.json('Your thought was deleted! 👋')
             )
             .catch((err) => res.status(500).json(err));
     },
@@ -81,11 +73,11 @@ module.exports = {
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : res.json('Your reaction was added 🙌')
+                    : res.json('Your reaction was added 💙')
             )
             .catch((err) => res.status(500).json(err));
     },
-    // delete reactions... not deleteing reaction returns status 500
+    // delete reactions... returns status 200, but doesn't delete reaction
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
@@ -93,8 +85,8 @@ module.exports = {
         )
             .then((thought) =>
                 !thought
-                    ? res.status(404).json({ message: ' There is no thought with this id!' })
-                    : res.json(thought)
+                    ? res.status(404).json({ message: 'There is no thought with this id!' })
+                    : res.json("Your reaction was deleted 💔")
             )
             .catch((err) => res.status(500).json(err));
     },
