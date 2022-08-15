@@ -1,4 +1,5 @@
 const { Thought, User } = require('../models');
+const { ObjectId } = require('mongoose').Types;
 
 module.exports = {
     // find all thoughts
@@ -77,11 +78,11 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // delete reactions... returns status 200, but doesn't delete reaction
+    // delete reactions
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: req.params.reactionId  } }
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
         )
             .then((thought) =>
                 !thought
