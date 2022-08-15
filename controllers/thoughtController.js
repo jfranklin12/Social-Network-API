@@ -17,18 +17,19 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // create new thought 
+    // create new thought
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
-                    { $addtoSet: { thoughts: thought._id } },
+                    { $push: { thoughts: thought._id } },
                     { new: true }
                 );
             })
             .then((user) =>
-                !user ? res.status(404).json({
+                !user 
+                ? res.status(404).json({
                     message: ' Thought created, but found no user with that ID!'
                 })
                     : res.json('Created your thought! 😎')
@@ -48,20 +49,20 @@ module.exports = {
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : res.status(thought)
+                    : res.json(thought)
             )
             .catch((err) => {
                 console.log(err);
                 res.status(500).json(err);
             });
     },
-    // delete thought
+    // delete thought... deleting thought but returing 500 error
     deleteThought(req, res) {
         Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'There is no thought with this id!' })
-                    : User.findOneandUpdate(
+                    : User.findOneandDelete(
                         { thought: req.params.thoughtId },
                         { $pull: { thoughts: req.paramas.thoughtId } },
                         { new: true }

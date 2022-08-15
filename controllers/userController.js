@@ -34,7 +34,7 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'No user with this id!' })
-                    : res.join(user)
+                    : res.json(user)
             )
             .catch((err) => {
                 console.log(err);
@@ -52,7 +52,7 @@ module.exports = {
             .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
-    // add friend
+    // add friend... adds friend but does not return user json
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -62,14 +62,14 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'There is no user with this id!' })
-                    : res.status(user)
+                    : res.json(user)
             )
             .catch((err) => {
                 console.log(err);
                 res.status(500).json(err);
             })
     },
-    // delete friend
+    // delete friend... deletes friend but does not return user json
     deleteFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -79,7 +79,7 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({ message: 'There is no user with this id!' })
-                    : res.status(user)
+                    : res.json(user)
             )
             .catch((err) => {
                 console.log(err);
