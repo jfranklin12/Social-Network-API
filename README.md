@@ -12,7 +12,7 @@
   ![GET Thoughts SCREEN SHOT](./assests/GETTHOUGHTS.jpg)
   ![DELETE USERS SCREEN SHOT](./assests/DELETEUSERS.jpg)
 
-  [Link to Walkthough Video](https://drive.google.com/file/d/1YBUccxW-UVTHromygtb5q_Klb7P1PL2f/view)
+  [Link to Walkthough Video](https://drive.google.com/file/d/1-RSisbQtVtqO8lXukffN7hBzR-ZbXb8T/view)
 
   ## Table of Content
   - [Installation](#installation)
